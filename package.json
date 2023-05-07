@@ -1,0 +1,25 @@
+{
+  "name": "$Koleso$",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open",
+    "build-babel": "babel src -d dist",
+    "build-webpack": "webpack --config webpack.config.js",
+    "build": "npm run build-babel && npm run build-webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/plugin-transform-react-jsx": "^7.21.5",
+    "html-webpack-plugin": "^5.5.1",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.0",
+    "webpack-dev-server": "^4.15.0"
+  }
+}
