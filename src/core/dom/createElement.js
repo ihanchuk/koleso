@@ -1,15 +1,21 @@
-export const createElement = (type, props, ...children) => {
+export function createElement(type, props, ...children) {
   return {
     type,
     props: {
       ...props,
-      children: children.map((child) => {
-        if (typeof child === "object") {
-          return child;
-        } else {
-          return createTextNode(child);
-        }
-      }),
+      children: children.map((child) =>
+        typeof child === "object" ? child : createTextElement(child)
+      ),
     },
   };
-};
+}
+
+export function createTextElement(text) {
+  return {
+    type: "TEXT_ELEMENT",
+    props: {
+      nodeValue: text,
+      children: [],
+    },
+  };
+}
