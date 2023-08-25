@@ -1,26 +1,10 @@
 import { createElement } from "./dom/createElement";
-
-export function createTextElement(text) {
-  return {
-    type: "TEXT_ELEMENT",
-    props: {
-      nodeValue: text,
-      children: [],
-    },
-  };
-}
-
-const isProperty = (key) => key !== "children";
-const isObject = (val) => {
-  return typeof val === "object";
-};
+import { isProperty, isTextElement } from "./utils";
 
 function render(element, container) {
-  console.log("Rendering element::", element);
-  const domNode =
-    element.type == "TEXT_ELEMENT"
-      ? document.createTextNode("")
-      : document.createElement(element.type);
+  const domNode = isTextElement(element)
+    ? document.createTextNode("")
+    : document.createElement(element.type);
 
   Object.keys(element.props)
     .filter(isProperty)
@@ -34,15 +18,7 @@ function render(element, container) {
 
 export const koleso = {
   jsx: (tag, props, ...children) => {
-    return {
-      type: tag,
-      props: {
-        ...props,
-        children: children.map((child) =>
-          isObject(child) ? child : createTextElement(child)
-        ),
-      },
-    };
+    return createElement(tag, props, children);
   },
   render,
 };

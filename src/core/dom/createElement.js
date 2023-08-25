@@ -1,10 +1,12 @@
-export function createElement(type, props, ...children) {
+import { isObject } from "../utils";
+
+export function createElement(type, props, children) {
   return {
     type,
     props: {
       ...props,
       children: children.map((child) =>
-        typeof child === "object" ? child : createTextElement(child)
+        isObject(child) ? child : createTextElement(child)
       ),
     },
   };
